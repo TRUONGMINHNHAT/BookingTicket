@@ -45,7 +45,7 @@ export default class HangGhe extends Component {
     } else {
       return <div>
           {this.props.hangGhe.hang}
-          {this.renderGhe()}
+          {/* {this.renderGhe()} */}
         </div>
     }
   }
