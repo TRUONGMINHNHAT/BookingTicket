@@ -26,6 +26,8 @@
     margin-bottom: 1%;
     font-size: 30px;
     color: yellow;
+    flex-direction: row-reverse;
+    justify-content: center;
     
 }
 .firstChar{

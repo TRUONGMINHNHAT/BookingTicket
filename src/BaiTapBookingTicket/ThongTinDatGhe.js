@@ -1,11 +1,13 @@
 import React, { Component } from 'react'
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './BaiTapBookingTicket.css'
 
 export default class ThongTinDatGhe extends Component {
   render() {
     return (
         <div>
         <div className="mt-5" >
-            <button className="gheDuocChon"></button>
+            <button className="gheDuocChon" ></button>
             <span className="text-light" style={{ fontSize: "30px" }}>
               Ghế đã đặt
             </span>
@@ -23,7 +25,7 @@ export default class ThongTinDatGhe extends Component {
         </div>
     
        <div className="mt-5" >
-          <table className="table" border='2'>
+          <table className="table" border='3'>
             <thead>
               <tr className="text-light">
                 <th>Số ghế</th>

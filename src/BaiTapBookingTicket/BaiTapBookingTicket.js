@@ -1,16 +1,17 @@
 import React, { Component } from 'react'
 import './BaiTapBookingTicket.css'
 import ThongTinDatGhe from './ThongTinDatGhe'
-import danhsachGheData from '../Data/danhSachGhe.json'
+import danhSachGheData from '../Data/danhSachGhe.json'
 import HangGhe from './HangGhe'
 
 
 class BaiTapBookingTicket extends Component {
 
+
   renderHangGhe = () => {
-    return danhsachGheData.map((hangGhe,index) => {
+    return danhSachGheData.map((hangGhe,index) => {
       return <div key={index}>
-        <HangGhe hangGhe={hangGhe}/>
+        <HangGhe hangGhe={hangGhe} soHangGhe={index}/>
       </div>
     })
   }
@@ -44,6 +45,7 @@ class BaiTapBookingTicket extends Component {
                       <div className="screen"></div>            
                     </div>
                     {this.renderHangGhe()}
+                    
                   </div>
                     <div className="col-4">
                       <div className="mt-2 text-light" style={{fontSize:'35px'}}>DANH SÁCH GHẾ BẠN CHỌN</div>
