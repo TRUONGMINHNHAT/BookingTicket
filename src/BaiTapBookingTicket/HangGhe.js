@@ -1,33 +1,41 @@
 import React, { Component } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./BaiTapBookingTicket.css";
+import {connect} from "react-redux";
+import { datGheAction } from "../action/BaiTapBookingTicketAction";
 
-export default class HangGhe extends Component {
+class HangGhe extends Component {
+
   renderGhe = () => {
-    return this.props.hangGhe.danhsachGhe.map((ghe, index) => {
-      if (index === 0) {
-        return <span className="rowNumber">{ghe.soGhe}</span>;
-      }
-
-      let cssGheDaDat = "";
+    return this.props.hangGhe.danhSachGhe.map((ghe,index) => {
+      let cssGheDaDat = '';
       let disable = false;
+      // Trạng thái ghế đã được đặt rồi
       if (ghe.daDat) {
-        cssGheDaDat = "gheDuocChon";
+        cssGheDaDat = 'gheDuocChon';
         disable = true;
       }
 
+      // Xét trạng thái ghế đang đặt
+      let cssGheDangDat = '';
+      let indexGheDangDat = this.props.danhSachGheDangDat.findIndex
+      (gheDangDat=>gheDangDat.soGhe === ghe.soGhe);
+      if(indexGheDangDat !== -1){
+        cssGheDangDat = 'gheDangChon'
+      }
+
       return (
-        <button
-          onClick={() => {}}
-          className="ghe"
-          disabled={disable}
-          key={index}
-        >
+        <button onClick={() => {
+          this.props.datGhe(ghe)
+        }} 
+                disabled={disable}
+                className={`ghe ${cssGheDaDat} ${cssGheDangDat}`}
+                key={index}>
           {ghe.soGhe}
         </button>
-      );
-    });
-  };
+      )
+    })
+  }
 
   renderSoHang = () => {
     return this.props.hangGhe.danhSachGhe.map((hang, index) => {
@@ -39,22 +47,38 @@ export default class HangGhe extends Component {
 
   renderHangGhe = () => {
     if (this.props.soHangGhe === 0) {
-      return <div className="ml-4">
+      return <div className="ml-6">
           {this.props.hangGhe.hang} {this.renderSoHang()}
         </div>
     } else {
       return <div>
           {this.props.hangGhe.hang}
-          {/* {this.renderGhe()} */}
+          {this.renderGhe()}
         </div>
     }
   }
 
   render() {
     return (
-      <div className="hangghe" style={{ fontSize: "30px" }}>
+      <div className="text-light text-left ml-5 mt-3" style={{ fontSize: "30px" }}>
         {this.renderHangGhe()}
       </div>
     );
   }
 }
+
+const mapStateToProps = state => {
+  return {
+    danhSachGheDangDat: state.BaiTapBookingTicketReducer.danhSachGheDangDat
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    datGhe: (ghe) => {
+      dispatch(datGheAction(ghe))
+    }
+  }
+}
+
+export default connect (mapStateToProps,mapDispatchToProps)(HangGhe);

@@ -5,7 +5,7 @@ import BaiTapBookingTicket from './BaiTapBookingTicket/BaiTapBookingTicket';
 
 function App() {
   return (
-    <div className="App">
+    <div>
       <BaiTapBookingTicket/>
     </div>
   );

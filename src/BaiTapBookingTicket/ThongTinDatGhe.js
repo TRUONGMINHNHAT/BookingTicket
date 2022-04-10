@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './BaiTapBookingTicket.css'
+import { huyGheAction } from '../action/BaiTapBookingTicketAction';
 
-export default class ThongTinDatGhe extends Component {
+ class ThongTinDatGhe extends Component {
   render() {
     return (
         <div>
@@ -27,27 +29,44 @@ export default class ThongTinDatGhe extends Component {
        <div className="mt-5" >
           <table className="table" border='3'>
             <thead>
-              <tr className="text-light">
+              <tr className="text-light" style={{fontSize:'25px'}}>
                 <th>Số ghế</th>
                 <th>Gía</th>
-                <th> </th>
+                <th></th>
               </tr>
             </thead>
-            <tbody>
-            <tr>
-                <th>Số ghế</th>
-                <th>Gía</th>
-                <th> </th>
-              </tr>
-              <tr>
-                <th>Số ghế</th>
-                <th>Gía</th>
-                <th> </th>
-              </tr>
+            <tbody className='text-warning'>
+              {this.props.danhSachGheDangDat.map((gheDangDat,index)=> {
+                return <tr key={index}>
+                        <td>{gheDangDat.soGhe}</td>
+                        <td>{gheDangDat.gia}</td>
+                        <td><button onClick={()=> {
+                          this.props.dispatch(huyGheAction(gheDangDat.soGhe))
+                        }}>Hủy</button></td>
+                </tr>
+              })}
             </tbody>
+            <tfoot>
+              <tr>
+                <td> </td>
+                <td>Tổng tiền</td>
+                <td>{this.props.danhSachGheDangDat.reduce((tongTien,gheDangDat,index)=>{
+                  return tongTien += gheDangDat.gia;
+                }, 0)}
+                  </td>
+              </tr>
+            </tfoot>
           </table>
        </div>
     </div>
     )
   }
 }
+
+const mapStatetoProps = state => {
+  return {
+    danhSachGheDangDat: state.BaiTapBookingTicketReducer.danhSachGheDangDat
+  }
+}
+
+export default connect(mapStatetoProps)(ThongTinDatGhe);

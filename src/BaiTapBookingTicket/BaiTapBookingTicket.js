@@ -39,13 +39,12 @@ class BaiTapBookingTicket extends Component {
               <div className="container-fluid">
                 <div className="row">
                   <div className="col-8 ">
-                    <div className="display-4 text-warning" style={{fontSize:'35px'}}>ĐẶT VÉ XEM PHIM CYBERLEARN.VN</div>
-                    <div className="mt-3 text-light" style={{fontSize:'25px'}}>Màn hình</div>
-                    <div className="mt-2" style={{display:'flex', flexDirection:'row', justifyContent:'center'}}>
+                    <div className="display-4 text-warning text-center" style={{fontSize:'35px'}}>ĐẶT VÉ XEM PHIM CYBERLEARN.VN</div>
+                    <div className="mt-3 text-light text-center" style={{fontSize:'25px'}}>Màn hình</div>
+                    <div className="mt-2" style={{display:'flex', flexDirection:'column', justifyContent:'center'}}>
                       <div className="screen"></div>            
                     </div>
-                    {this.renderHangGhe()}
-                    
+                    {this.renderHangGhe()}                    
                   </div>
                     <div className="col-4">
                       <div className="mt-2 text-light" style={{fontSize:'35px'}}>DANH SÁCH GHẾ BẠN CHỌN</div>
